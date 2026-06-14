@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 import '../profile/profile_menu.dart';
 import '../goals/trackers.dart';
@@ -117,7 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 const CircleAvatar(
                   radius: 22,
                   backgroundColor: Color(0xFFB9A79A),
-                  child: Icon(Icons.person, color: Colors.white),
+                  backgroundImage:
+                      ResizeImage(AssetImage(AppImages.lockerFront), width: 132),
                 ),
                 Positioned(
                   bottom: -2,

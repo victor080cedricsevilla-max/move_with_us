@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 import 'video_detail.dart';
 
@@ -117,7 +118,7 @@ class _OnDemandViewState extends State<OnDemandView> {
           children: [
             Stack(
               children: [
-                PhotoPlaceholder(height: 150, width: width, color: const Color(0xFFC4BCB2)),
+                PhotoPlaceholder(height: 150, width: width, color: const Color(0xFFC4BCB2), asset: AppImages.at(v.title.hashCode)),
                 const Positioned(
                   top: 10,
                   left: 10,
@@ -199,7 +200,7 @@ class _ViewAllScreen extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    PhotoPlaceholder(height: 170, width: double.infinity, color: const Color(0xFFC4BCB2)),
+                    PhotoPlaceholder(height: 170, width: double.infinity, color: const Color(0xFFC4BCB2), asset: AppImages.at(v.title.hashCode)),
                     const Positioned(top: 10, left: 10, child: Icon(Icons.favorite_border, color: Colors.white)),
                     if (v.tag != null)
                       Positioned.fill(child: Center(child: Text(v.tag!, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)))),
@@ -250,7 +251,7 @@ class _FavTile extends StatelessWidget {
       children: [
         Stack(
           children: [
-            PhotoPlaceholder(height: 170, width: double.infinity, color: const Color(0xFFC4BCB2)),
+            PhotoPlaceholder(height: 170, width: double.infinity, color: const Color(0xFFC4BCB2), asset: AppImages.at(title.hashCode)),
             const Positioned(top: 10, left: 10, child: Icon(Icons.favorite, color: Colors.red)),
           ],
         ),

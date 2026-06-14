@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 import '../paywall/membership_screen.dart';
 
@@ -141,6 +142,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             radius: 60,
                             icon: Icons.person,
                             color: Color(0xFFB9A79A),
+                            asset: AppImages.mirrorGrey,
                           )
                         : Column(
                             mainAxisAlignment: MainAxisAlignment.end,

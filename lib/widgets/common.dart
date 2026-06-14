@@ -349,7 +349,11 @@ class CalorieBar extends StatelessWidget {
   }
 }
 
-/// Soft grey placeholder used wherever a photo/video would appear.
+/// Photo slot used wherever an image/video would appear.
+///
+/// When [asset] is given it renders that bundled image (cover-cropped to the
+/// rounded box); otherwise — or if the image fails to load — it falls back to a
+/// soft tinted gradient with an [icon] or [label], so the layout never breaks.
 class PhotoPlaceholder extends StatelessWidget {
   const PhotoPlaceholder({
     super.key,
@@ -360,6 +364,7 @@ class PhotoPlaceholder extends StatelessWidget {
     this.icon = Icons.image_outlined,
     this.color = const Color(0xFFD9D7CF),
     this.child,
+    this.asset,
   });
 
   final double? height;
@@ -370,9 +375,12 @@ class PhotoPlaceholder extends StatelessWidget {
   final Color color;
   final Widget? child;
 
+  /// Optional bundled image asset (see [AppImages]). Null shows the gradient.
+  final String? asset;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final fallback = Container(
       height: height,
       width: width,
       decoration: BoxDecoration(
@@ -396,6 +404,31 @@ class PhotoPlaceholder extends StatelessWidget {
                   ),
                 )
               : Icon(icon, color: Colors.white70, size: 34)),
+    );
+
+    if (asset == null) return fallback;
+
+    // Decode the photo downscaled to (roughly) its on-screen size so large
+    // source files don't get fully decoded on the main thread — full-res
+    // decodes caused frame drops / freezes on lower-end devices.
+    final dpr = MediaQuery.maybeDevicePixelRatioOf(context) ?? 2.0;
+    final cacheWidth = (width != null && width!.isFinite)
+        ? (width! * dpr).round()
+        : (height != null && height!.isFinite)
+            ? (height! * dpr).round() // square-ish slots: cap by height
+            : 1080; // full-bleed images
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: SizedBox(
+        height: height,
+        width: width,
+        child: Image.asset(
+          asset!,
+          cacheWidth: cacheWidth,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => fallback,
+        ),
+      ),
     );
   }
 }

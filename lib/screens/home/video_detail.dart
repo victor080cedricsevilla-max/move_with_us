@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 
 class VideoDetailScreen extends StatefulWidget {
@@ -108,6 +109,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
             radius: 0,
             color: Color(0xFF7E6A57),
             icon: Icons.spa,
+            asset: AppImages.yogaStretch,
           ),
           Positioned(
             top: 10,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 import 'tutorial.dart';
 
@@ -195,11 +196,12 @@ class _FindPerfectFitScreenState extends State<FindPerfectFitScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const PhotoPlaceholder(
+                    PhotoPlaceholder(
                       width: 86,
                       height: 110,
                       radius: 8,
-                      color: Color(0xFFB6A89A),
+                      color: const Color(0xFFB6A89A),
+                      asset: AppImages.at(p.title.hashCode),
                     ),
                     const SizedBox(width: 14),
                     Expanded(

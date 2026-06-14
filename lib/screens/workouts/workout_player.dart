@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 import 'share_selfie.dart';
 
@@ -141,7 +142,7 @@ class _WorkoutPlayerScreenState extends State<WorkoutPlayerScreen> {
             ),
           ),
           const SizedBox(height: 40),
-          const PhotoPlaceholder(height: 140, color: Color(0xFFE9E7DF), icon: Icons.directions_run),
+          const PhotoPlaceholder(height: 140, color: Color(0xFFE9E7DF), icon: Icons.directions_run, asset: AppImages.yogaStretch),
           const Spacer(),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
@@ -175,7 +176,7 @@ class _WorkoutPlayerScreenState extends State<WorkoutPlayerScreen> {
           Text(widget.title, style: AppText.title),
           Text('Set $_set/3', style: AppText.bodyMuted),
           const SizedBox(height: 20),
-          const PhotoPlaceholder(height: 240, color: Color(0xFFE9E7DF), icon: Icons.directions_run),
+          const PhotoPlaceholder(height: 240, color: Color(0xFFE9E7DF), icon: Icons.directions_run, asset: AppImages.gymLavender),
           const Spacer(),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 import 'workout_detail.dart';
 
@@ -123,7 +124,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(24, 0, 24, 30),
         children: [
-          const PhotoPlaceholder(height: 280, color: Color(0xFFD9D7CF), icon: Icons.directions_run),
+          const PhotoPlaceholder(height: 280, color: Color(0xFFD9D7CF), icon: Icons.directions_run, asset: AppImages.gymLavender),
           const SizedBox(height: 20),
           Text(_name, style: AppText.h1),
           const SizedBox(height: 8),
@@ -182,7 +183,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
               ),
               child: Row(
                 children: [
-                  const PhotoPlaceholder(width: 48, height: 48, radius: 8, color: Color(0xFFD9D7CF)),
+                  const PhotoPlaceholder(width: 48, height: 48, radius: 8, color: Color(0xFFD9D7CF), asset: AppImages.gymBlue),
                   const SizedBox(width: 14),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,7 +219,7 @@ class _SwapDetailScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(24, 0, 24, 30),
         children: [
-          const PhotoPlaceholder(height: 280, color: Color(0xFFD9D7CF), icon: Icons.self_improvement),
+          const PhotoPlaceholder(height: 280, color: Color(0xFFD9D7CF), icon: Icons.self_improvement, asset: AppImages.yogaStretch),
           const SizedBox(height: 20),
           Text(name, style: AppText.h1),
           const SizedBox(height: 8),

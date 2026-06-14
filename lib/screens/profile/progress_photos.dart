@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 
 class ProgressPhotosScreen extends StatefulWidget {
@@ -47,9 +48,9 @@ class _ProgressPhotosScreenState extends State<ProgressPhotosScreen> {
         children: [
           Row(
             children: [
-              Expanded(child: _slot('Before', _hasBefore, () => _addPhoto(true))),
+              Expanded(child: _slot('Before', _hasBefore, AppImages.mirrorGrey, () => _addPhoto(true))),
               const SizedBox(width: 14),
-              Expanded(child: _slot('Latest', _hasLatest, () => _addPhoto(false))),
+              Expanded(child: _slot('Latest', _hasLatest, AppImages.lockerBack, () => _addPhoto(false))),
             ],
           ),
           const SizedBox(height: 24),
@@ -59,13 +60,13 @@ class _ProgressPhotosScreenState extends State<ProgressPhotosScreen> {
     );
   }
 
-  Widget _slot(String label, bool has, VoidCallback onTap) {
+  Widget _slot(String label, bool has, String asset, VoidCallback onTap) {
     return Column(
       children: [
         GestureDetector(
           onTap: onTap,
           child: has
-              ? PhotoPlaceholder(height: 260, color: const Color(0xFFB9A79A), icon: Icons.person)
+              ? PhotoPlaceholder(height: 260, color: const Color(0xFFB9A79A), icon: Icons.person, asset: asset)
               : Container(
                   height: 260,
                   decoration: BoxDecoration(

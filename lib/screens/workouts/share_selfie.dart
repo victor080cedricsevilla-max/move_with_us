@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 
 class ShareSelfieScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _ShareSelfieScreenState extends State<ShareSelfieScreen> {
       body: Stack(
         children: [
           const Positioned.fill(
-            child: PhotoPlaceholder(radius: 0, color: Color(0xFF6F6258), icon: Icons.person),
+            child: PhotoPlaceholder(radius: 0, color: Color(0xFF6F6258), icon: Icons.person, asset: AppImages.mirrorPink),
           ),
           SafeArea(
             child: Padding(

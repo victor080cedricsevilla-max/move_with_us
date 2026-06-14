@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../theme/app_images.dart';
 import '../../widgets/common.dart';
 import 'workout_detail.dart';
 
@@ -36,7 +37,7 @@ class AddExtraScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
         children: [
-          const PhotoPlaceholder(height: 200, color: Color(0xFFBFB2A4), icon: Icons.groups),
+          const PhotoPlaceholder(height: 200, color: Color(0xFFBFB2A4), icon: Icons.groups, asset: AppImages.gymBlue),
           const SizedBox(height: 20),
           _favCard(context),
           const SizedBox(height: 16),
