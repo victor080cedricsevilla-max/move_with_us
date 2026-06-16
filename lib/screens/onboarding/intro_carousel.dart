@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../theme/app_images.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/common.dart';
 import 'sign_in.dart';
@@ -12,10 +13,23 @@ class IntroCarousel extends StatefulWidget {
 }
 
 class _IntroSlide {
-  const _IntroSlide(this.title, this.body, this.colors);
+  const _IntroSlide(
+    this.title,
+    this.body,
+    this.colors, {
+    this.image,
+    this.name,
+  });
   final String title;
   final String body;
   final List<Color> colors;
+
+  /// Optional full-bleed photo background. When null the slide falls back to
+  /// the [colors] gradient.
+  final String? image;
+
+  /// Optional name shown large over the photo (e.g. the featured coach).
+  final String? name;
 }
 
 class _IntroCarouselState extends State<IntroCarousel> {
@@ -27,6 +41,8 @@ class _IntroCarouselState extends State<IntroCarousel> {
       'Personalised Programs',
       'Choose from 10+ expert-built programs designed around your goals and experience level.',
       [Color(0xFF9FB0C4), Color(0xFF6E8096)],
+      image: AppImages.gymLavender,
+      name: 'Lilly Mateo',
     ),
     _IntroSlide(
       'Workouts That Fit You',
@@ -74,74 +90,106 @@ class _IntroCarouselState extends State<IntroCarousel> {
             onPageChanged: (i) => setState(() => _index = i),
             itemBuilder: (_, i) {
               final s = _slides[i];
-              return Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: s.colors,
+              final hasPhoto = s.image != null;
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  // Background: full-bleed photo, or the slide gradient.
+                  if (hasPhoto)
+                    Image.asset(s.image!, fit: BoxFit.cover)
+                  else
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: s.colors,
+                        ),
+                      ),
+                    ),
+                  // Scrim so the text stays legible over the photo/gradient.
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: hasPhoto
+                            ? [
+                                Colors.black.withValues(alpha: 0.30),
+                                Colors.black.withValues(alpha: 0.20),
+                                Colors.black.withValues(alpha: 0.70),
+                              ]
+                            : [
+                                Colors.black.withValues(alpha: 0.05),
+                                Colors.black.withValues(alpha: 0.35),
+                              ],
+                      ),
+                    ),
                   ),
-                ),
-                child: Stack(
-                  children: [
-                    // subtle "person" silhouette feel via translucent shapes
-                    Positioned.fill(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.black.withValues(alpha: 0.05),
-                              Colors.black.withValues(alpha: 0.35),
-                            ],
+                  Align(
+                    alignment:
+                        hasPhoto ? const Alignment(0, 0.55) : const Alignment(0, 0.25),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            'M O V E . W I T H U S',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w300,
+                              letterSpacing: 2,
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: const Alignment(0, 0.25),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              'M O V E . W I T H U S',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w300,
-                                letterSpacing: 2,
-                              ),
-                            ),
-                            const SizedBox(height: 26),
+                          const SizedBox(height: 26),
+                          if (s.name != null) ...[
                             Text(
-                              s.title,
+                              s.name!,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 36,
-                                height: 1.1,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 52,
+                                height: 1.05,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 0.5,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black54,
+                                    blurRadius: 16,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 18),
-                            Text(
-                              s.body,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                height: 1.35,
-                              ),
-                            ),
+                            const SizedBox(height: 14),
                           ],
-                        ),
+                          Text(
+                            s.title,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 36,
+                              height: 1.1,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 18),
+                          Text(
+                            s.body,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              height: 1.35,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               );
             },
           ),
